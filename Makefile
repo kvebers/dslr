@@ -1,5 +1,4 @@
 IMAGE_NAME = dslr
-
 CURRENT_DIR = $(shell pwd)
 
 all: build run

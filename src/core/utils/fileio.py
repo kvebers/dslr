@@ -1,7 +1,7 @@
 import os
 import json
 
-def extract_input_from_file (filename :str = "default_data.csv") -> list :
+def extract_input_from_file (filename :str = "dataset_train.csv") -> list :
     current_directory = str(os.getcwd())
     PATH = current_directory + "/data/" + filename
     value = []

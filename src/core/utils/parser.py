@@ -1,5 +1,7 @@
 from core.utils.fileio import extract_input_from_file
 
+
+
 def extract_data_content(rows: list) -> list[dict]:
     keys = rows[0].split(",") 
     value = {}
@@ -9,8 +11,9 @@ def extract_data_content(rows: list) -> list[dict]:
         content.append(value)
     return content
 
-def execute_parsing(dataset_name: str = "dataset_train.csv") -> tuple[ list, list]:
+def execute_parsing(dataset_name: str = "dataset_train.csv") -> list[dict]:
     content = extract_input_from_file(dataset_name)
     if content == None:
         return None, None
     return extract_data_content(content)
+
