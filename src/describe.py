@@ -6,7 +6,6 @@ from pprint import pprint
 from core.utils.parser import execute_parsing
 from core.description.operation import execute_describe
 
-
 if __name__ == "__main__":
     if (len(sys.argv) != 2):
         print("Usage: ./describe.py DATA_SET_NAME")
