@@ -20,16 +20,13 @@ def histogram_plot(dataset):
     houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
     courses = data.columns[6:]
     new_courses = normalize_data(data[courses])
-    new_courses.dropna()
-    # fix, axes = plt.subplots(len(courses), 1)
-    # axes = axes.flatten()
-    # for i, course in enumerate(courses):
-    #     ax = axes[i]
-    #     for house in houses:
-    #         data_regarding_house = data[data['Hogwarts House'] == house]
-    #         scores_in_particular_course = data_regarding_house[course]
-    #         scores_in_particular_course = scores_in_particular_course.dropna()
-    #         ax.hist(scores_in_particular_course, bins=20, alpha=0.5, label=house, density=True)
-    # plt.show()
-
-
+    fix, axes = plt.subplots(len(courses), 1)
+    axes = axes.flatten()
+    for i, course in enumerate(courses):
+        ax = axes[i]
+        for house in houses:
+            data_regarding_house = data[data['Hogwarts House'] == house]
+            scores_in_particular_course = new_courses[course][data['Hogwarts House'] == house]
+            scores_in_particular_course = scores_in_particular_course.dropna()
+            ax.hist(scores_in_particular_course, bins=20, alpha=0.5, label=house, density=True)
+    plt.show()
