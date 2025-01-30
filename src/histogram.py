@@ -4,6 +4,7 @@ import sys
 
 
 
+
 if __name__ == "__main__":
     dataset = 'data/dataset_train.csv'
     if (len(sys.argv) != 1):
@@ -11,7 +12,3 @@ if __name__ == "__main__":
         print("Usage: ./histogram.py")
         sys.exit(1)
     histogram_plot(dataset)
-
-
-
-
