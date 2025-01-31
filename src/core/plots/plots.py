@@ -68,5 +68,30 @@ def scatter_plot(dataset):
             ax.scatter(new_courses[course], new_courses[other_course], alpha=0.5, color='red')
             ax.set_title(f"{course[:3]} vs {other_course[:3]}")
             ax.legend()
-    plt.tight_layout()
     plt.show()
+
+
+def pair_scatter_histogram_plot(dataset):
+    data = pd.read_csv(dataset)
+    courses = data.columns[6:]
+    houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
+    new_courses = normalize_data(data[courses])
+    fig, axes = plt.subplots(len(courses), len(courses), figsize=(6, 4))
+    axes = axes.flatten()
+    for i, course in enumerate(courses):
+        ax = axes[i]
+        for j, other_course in enumerate(courses):
+            ax = axes[i * len(courses) + j]
+            if (i == j):
+                for house in houses:
+                    data_regarding_house = data[data['Hogwarts House'] == house]
+                    scores_in_particular_course = new_courses[course][data['Hogwarts House'] == house]
+                    scores_in_particular_course = clean_data(scores_in_particular_course)
+                    ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True)
+                    ax.set_title(f"{course}")
+            else:
+                ax.scatter(new_courses[course], new_courses[other_course], alpha=0.5, color='red')
+                ax.legend()
+                ax.set_title(f"{course[:3]} vs {other_course[:3]}")
+    plt.show()
+
