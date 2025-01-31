@@ -16,8 +16,15 @@ def normalize_data(data):
 
 
 def clean_data(data):
-    data = [element for element in data if element != '' or element != ' ']
+    data = [element for element in data if element != '' or element != a.empty]
     return pd.DataFrame(data) 
+
+
+def hands_data(data):
+    data = [1 if element == 'Left' else 0 if element == 'Right' else ' ' for element in data]
+    return pd.DataFrame(data)
+
+
 
 
 # Vienmērīgais sadalījums varbūtību teorijā ir nepātraukts varbūtību sadalījums.
@@ -42,6 +49,24 @@ def histogram_plot(dataset):
             scores_in_particular_course = clean_data(scores_in_particular_course)
             ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True)
             ax.set_title(f"{course}")
+            ax.legend()
+    plt.tight_layout()
+    plt.show()
+
+
+
+def scatter_plot(dataset):
+    data = pd.read_csv(dataset)
+    courses = data.columns[6:]
+    new_courses = normalize_data(data[courses])
+    fig, axes = plt.subplots(len(courses), len(courses), figsize=(6, 4))
+    axes = axes.flatten()
+    for i, course in enumerate(courses):
+        ax = axes[i]
+        for j, other_course in enumerate(courses):
+            ax = axes[i * len(courses) + j]
+            ax.scatter(new_courses[course], new_courses[other_course], alpha=0.5, color='red')
+            ax.set_title(f"{course[:3]} vs {other_course[:3]}")
             ax.legend()
     plt.tight_layout()
     plt.show()
