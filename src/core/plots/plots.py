@@ -19,6 +19,14 @@ def clean_data(data):
     data = [element for element in data if element != '' or element != ' ']
     return pd.DataFrame(data) 
 
+
+# Vienmērīgais sadalījums varbūtību teorijā ir nepātraukts varbūtību sadalījums.
+# Vienmērīgi sadalīts gadījuma lielums pieņem vērtības
+# galīgā intervālā un tā blīvuma funkcija šajā intervālā ir konstanta.
+# Tas nozīmē, ka jebkuriem apakšintervāliem ar vienādu garumu piemīt vienāda varbūtība.
+
+# TLDR: If the data is uniformly distributed,
+# the data will be similar for each course for each house -> as in function below
 def histogram_plot(dataset):
     data = pd.read_csv(dataset)
     houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
@@ -32,7 +40,7 @@ def histogram_plot(dataset):
             data_regarding_house = data[data['Hogwarts House'] == house]
             scores_in_particular_course = new_courses[course][data['Hogwarts House'] == house]
             scores_in_particular_course = clean_data(scores_in_particular_course)
-            ax.hist(scores_in_particular_course, bins=20, alpha=0.5, label=house, density=True)
+            ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True)
             ax.set_title(f"{course}")
             ax.legend()
     plt.tight_layout()
