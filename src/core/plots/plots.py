@@ -55,6 +55,7 @@ def histogram_plot(dataset):
 
 
 
+
 def scatter_plot(dataset):
     data = pd.read_csv(dataset)
     courses = data.columns[6:]
@@ -68,6 +69,16 @@ def scatter_plot(dataset):
             ax.scatter(new_courses[course], new_courses[other_course], alpha=0.5, color='red')
             ax.set_title(f"{course[:3]} vs {other_course[:3]}")
             ax.legend()
+    plt.show()
+    fig, axes = plt.subplots(2, 1, figsize=(8, 4))
+    axes = axes.flatten()
+    ax = axes[0]
+    ax.scatter(new_courses['Astronomy'], new_courses['Defense Against the Dark Arts'], alpha=0.5, color='red')
+    ax.set_title("Astronomy vs Defense Against the Dark Arts")
+    ax = axes[1]
+    ax.scatter(new_courses['Astronomy'], new_courses['Defense Against the Dark Arts'], alpha=0.5, color='red')
+    ax.set_title("Astronomy vs Herbology")
+    ax.legend()
     plt.show()
 
 
