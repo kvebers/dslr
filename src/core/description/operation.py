@@ -166,6 +166,19 @@ def get_quartiles(dataset, header):
             v_75.append('Not a float')
     return v_25, v_50, v_75
 
+def clean_data_and_feed_it_francesco(dataset, headers_to_remove):
+    dataset_values, header = read_dataset(dataset)
+    index_to_remove = [header.index(header_to_remove) for header_to_remove in headers_to_remove]
+    index_to_remove.sort(reverse=True)
+    header = [header[i] for i in range(len(header)) if i not in index_to_remove]
+    cleaned_dataset = [[row[i] for i in range(len(row)) if i not in index_to_remove] for row in dataset_values]
+    new_dataset = []
+    for row in cleaned_dataset:
+        if all(cell != '' and cell != ' ' for cell in row):
+            new_dataset.append(row)
+    new_dataset.append(row)
+    return new_dataset, header
+
 def  execute_describe(dataset):
     dataset_values, header = read_dataset(dataset)
     new_header = ["Column"]
@@ -180,3 +193,4 @@ def  execute_describe(dataset):
     print(v_25)
     print(v_50)
     print(v_75)
+    clean_data_and_feed_it_francesco(dataset, ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Astronomy", "Herbology", "Potions", "Care of Magical Creatures", "Charms", "Flying"])
