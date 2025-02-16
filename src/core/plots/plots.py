@@ -59,11 +59,26 @@ def histogram_plot(dataset):
     plt.show()
 
 
+def extract_months(data):
+    return pd.to_datetime(data).dt.month
 
+def extract_years(data):
+    return pd.to_datetime(data).dt.year
+
+def extract_days(data):
+    return pd.to_datetime(data).dt.day
+
+
+def normalize_houses(data):
+    return data.apply(lambda x: houses.index(x))
 
 def scatter_plot(dataset):
     data = pd.read_csv(dataset)
     data["Hand Normalized"] = hands_data(data["Best Hand"])
+    data["Months"] = extract_months(data["Birthday"])
+    data["Years"] = extract_years(data["Birthday"])
+    data["Days"] = extract_days(data["Birthday"])
+    data["House Normalized"] = normalize_houses(data["Hogwarts House"])
     courses = data.columns[6:]
     new_courses = normalize_data(data[courses])
     fig, axes = plt.subplots(len(courses), len(courses), figsize=(16, 10))
@@ -76,19 +91,24 @@ def scatter_plot(dataset):
                 house_data = data[data['Hogwarts House'] == house]
                 x_axis_scores = clean_data(new_courses[course][data['Hogwarts House'] == house])
                 y_axis_scores = clean_data(new_courses[other_course][data['Hogwarts House'] == house])
-                ax.scatter(x_axis_scores, y_axis_scores, alpha=0.5, label=house, color=color)
+                ax.scatter(x_axis_scores, y_axis_scores, alpha=0.25, label=house, color=color)
             ax.set_title(f"{course[:3]} vs {other_course[:3]}")
     axes[0].legend(loc='upper right', bbox_to_anchor=(0.0, 0.0))
     plt.show()
-    fig, axes = plt.subplots(2, 1, figsize=(8, 4))
+    fig, axes = plt.subplots(5, 1, figsize=(8, 4))
     axes = axes.flatten()
-    ax = axes[0]
-    ax.scatter(new_courses['Astronomy'], new_courses['Defense Against the Dark Arts'], alpha=0.5, color='red')
-    ax.set_title("Astronomy vs Defense Against the Dark Arts")
-    ax = axes[1]
-    ax.scatter(new_courses['Astronomy'], new_courses['Defense Against the Dark Arts'], alpha=0.5, color='red')
-    ax.set_title("Astronomy vs Herbology")
-    ax.legend()
+    for house in houses:
+        ax = axes[0]
+        color = colors[house]
+        ax.scatter(new_courses['Astronomy'], new_courses['Defense Against the Dark Arts'], alpha=0.5, color=color, label=house)
+        ax.set_title("Answer: Astronomy vs Defense Against the Dark Arts")
+    for i, house in enumerate(houses):
+        color = colors[house]
+        ax = axes[i + 1]
+        house_data = data[data['Hogwarts House'] == house]
+        ax.scatter(house_data['Astronomy'], house_data['Defense Against the Dark Arts'], alpha=0.5, color=colors[house], label=house)
+        ax.set_title(f"{house}")
+    axes[0].legend(loc='upper right', bbox_to_anchor=(0.0, 0.0))
     plt.show()
 
 
