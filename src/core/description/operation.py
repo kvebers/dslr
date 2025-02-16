@@ -166,6 +166,42 @@ def get_quartiles(dataset, header):
             v_75.append('Not a float')
     return v_25, v_50, v_75
 
+def remove_columns(dataset, headers_to_remove):
+    dataset_values, header = read_dataset(dataset)
+    index_to_remove = [header.index(header_to_remove) for header_to_remove in headers_to_remove]
+    index_to_remove.sort(reverse=True)
+    header = [header[i] for i in range(len(header)) if i not in index_to_remove]
+    cleaned_dataset = [[row[i] for i in range(len(row)) if i not in index_to_remove] for row in dataset_values]
+    return cleaned_dataset, header
+
+def remove_empty_rows(dataset):
+    new_dataset = []
+    for row in dataset:
+        if all(cell != '' and cell != ' ' for cell in row):
+            new_dataset.append(row)
+    return new_dataset
+
+
+def normalize_data(dataset, header):
+    new_dataset = dataset.copy()
+    for i in range(len(header)):
+        if check_if_can_calculate_mean(get_column(dataset, header[i], header)):
+            column = get_column(dataset, header[i], header)
+            min_value = get_min(column)
+            max_value = get_max(column)
+            for j in range(len(column)):
+                new_dataset[j][i] = (float(column[j]) - min_value) / (max_value - min_value)
+    return new_dataset
+
+
+
+
+def clean_data_and_feed_it_francesco(dataset, headers_to_remove):
+    cleaned_dataset, header = remove_columns(dataset, headers_to_remove)
+    new_dataset = remove_empty_rows(cleaned_dataset)
+    normalize_data(new_dataset, header)
+    return new_dataset, header
+
 def  execute_describe(dataset):
     dataset_values, header = read_dataset(dataset)
     new_header = ["Column"]
@@ -180,3 +216,4 @@ def  execute_describe(dataset):
     print(v_25)
     print(v_50)
     print(v_75)
+    clean_data_and_feed_it_francesco(dataset, ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"])
