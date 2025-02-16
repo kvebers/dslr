@@ -25,7 +25,13 @@ def hands_data(data):
     return pd.DataFrame(data)
 
 
-
+colors = {
+    "Gryffindor": "red",
+    "Slytherin": "green",
+    "Ravenclaw": "blue",
+    "Hufflepuff": "yellow"
+}
+houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
 
 # Vienmērīgais sadalījums varbūtību teorijā ir nepātraukts varbūtību sadalījums.
 # Vienmērīgi sadalīts gadījuma lielums pieņem vērtības
@@ -36,7 +42,6 @@ def hands_data(data):
 # the data will be similar for each course for each house -> as in function below
 def histogram_plot(dataset):
     data = pd.read_csv(dataset)
-    houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
     courses = data.columns[6:]
     new_courses = normalize_data(data[courses])
     fig, axes = plt.subplots(int((len(courses) + 2) / 3), 3, figsize=(8, 4))
@@ -47,9 +52,9 @@ def histogram_plot(dataset):
             data_regarding_house = data[data['Hogwarts House'] == house]
             scores_in_particular_course = new_courses[course][data['Hogwarts House'] == house]
             scores_in_particular_course = clean_data(scores_in_particular_course)
-            ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True)
+            ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True, color=colors[house])
             ax.set_title(f"{course}")
-            ax.legend()
+    axes[0].legend(loc='upper right', bbox_to_anchor=(0.0, 0.0))
     plt.tight_layout()
     plt.show()
 
@@ -58,17 +63,22 @@ def histogram_plot(dataset):
 
 def scatter_plot(dataset):
     data = pd.read_csv(dataset)
+    data["Hand Normalized"] = hands_data(data["Best Hand"])
     courses = data.columns[6:]
     new_courses = normalize_data(data[courses])
-    fig, axes = plt.subplots(len(courses), len(courses), figsize=(6, 4))
+    fig, axes = plt.subplots(len(courses), len(courses), figsize=(16, 10))
     axes = axes.flatten()
     for i, course in enumerate(courses):
-        ax = axes[i]
         for j, other_course in enumerate(courses):
             ax = axes[i * len(courses) + j]
-            ax.scatter(new_courses[course], new_courses[other_course], alpha=0.5, color='red')
+            for house in houses:
+                color = colors[house]
+                house_data = data[data['Hogwarts House'] == house]
+                x_axis_scores = clean_data(new_courses[course][data['Hogwarts House'] == house])
+                y_axis_scores = clean_data(new_courses[other_course][data['Hogwarts House'] == house])
+                ax.scatter(x_axis_scores, y_axis_scores, alpha=0.5, label=house, color=color)
             ax.set_title(f"{course[:3]} vs {other_course[:3]}")
-            ax.legend()
+    axes[0].legend(loc='upper right', bbox_to_anchor=(0.0, 0.0))
     plt.show()
     fig, axes = plt.subplots(2, 1, figsize=(8, 4))
     axes = axes.flatten()
@@ -85,24 +95,28 @@ def scatter_plot(dataset):
 def pair_scatter_histogram_plot(dataset):
     data = pd.read_csv(dataset)
     courses = data.columns[6:]
-    houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
     new_courses = normalize_data(data[courses])
-    fig, axes = plt.subplots(len(courses), len(courses), figsize=(6, 4))
+    fig, axes = plt.subplots(len(courses), len(courses), figsize=(16, 10))
     axes = axes.flatten()
     for i, course in enumerate(courses):
         ax = axes[i]
         for j, other_course in enumerate(courses):
             ax = axes[i * len(courses) + j]
-            if (i == j):
-                for house in houses:
+            for house in houses:
+                if (i == j):
                     data_regarding_house = data[data['Hogwarts House'] == house]
                     scores_in_particular_course = new_courses[course][data['Hogwarts House'] == house]
                     scores_in_particular_course = clean_data(scores_in_particular_course)
-                    ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True)
+                    ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True, color=colors[house])
                     ax.set_title(f"{course}")
-            else:
-                ax.scatter(new_courses[course], new_courses[other_course], alpha=0.5, color='red')
-                ax.legend()
-                ax.set_title(f"{course[:3]} vs {other_course[:3]}")
+                else:
+                    color = colors[house]
+                    house_data = data[data['Hogwarts House'] == house]
+                    x_axis_scores = clean_data(new_courses[course][data['Hogwarts House'] == house])
+                    y_axis_scores = clean_data(new_courses[other_course][data['Hogwarts House'] == house])
+                    ax.scatter(x_axis_scores, y_axis_scores, alpha=0.5, label=house, color=color)
+                    ax.set_title(f"{course[:3]} vs {other_course[:3]}")
+    axes[0].legend(loc='upper right', bbox_to_anchor=(0.0, 0.0))
+    plt.tight_layout()
     plt.show()
 
