@@ -194,8 +194,6 @@ def normalize_data(dataset, header):
     return new_dataset
 
 
-
-
 def clean_data_and_feed_it_francesco(dataset, headers_to_remove):
     cleaned_dataset, header = remove_columns(dataset, headers_to_remove)
     new_dataset = remove_empty_rows(cleaned_dataset)
@@ -216,4 +214,3 @@ def  execute_describe(dataset):
     print(v_25)
     print(v_50)
     print(v_75)
-    clean_data_and_feed_it_francesco(dataset, ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"])
