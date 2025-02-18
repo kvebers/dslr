@@ -4,7 +4,7 @@ import math
 
 houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
 learning_rate = 0.001
-epochs = 10000
+epochs = 1000
 
 def prep_data_for_each_house(data, house):
     # data = [row for row in data if row[0] == house row[0] = 1 else row[0] = 0]
@@ -18,7 +18,7 @@ def prep_data_for_each_house(data, house):
 
 # logistic_function
 def sigmoid_function(prediction):
-    return (1 / 1 + math.exp(-prediction))
+    return (1 / (1 + math.exp(-prediction)))
 
 
 def gradient_descend(row, l_value, weights):
@@ -30,7 +30,7 @@ def gradient_descend(row, l_value, weights):
 
 def train_for_each_house(data):
     for house in houses:
-        weights = list(range(20))
+        weights = [0.0 for i in range(len(data[0]))]
         house_data = prep_data_for_each_house(data, house)
         for i in range(epochs):
             for row in house_data:
@@ -41,7 +41,7 @@ def train_for_each_house(data):
                 weights = gradient_descend( row, logistic_value, weights)
         # print(weights)
                 if i == (epochs-1):
-                    print ( row[0], logistic_value)
+                    print (row[0], logistic_value)
 
 
 
