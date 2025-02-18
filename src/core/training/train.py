@@ -1,5 +1,6 @@
 from ..description.operation import clean_data_and_feed_it_francesco
 import copy
+import math
 
 houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
 learning_rate = 0.001
@@ -15,15 +16,34 @@ def prep_data_for_each_house(data, house):
             row[0] = 0
     return new_data
 
+# logistic_function
+def sigmoid_function(prediction):
+    return (1 / 1 + math.exp(-prediction))
+
+
+def gradient_descend(row, l_value, weights):
+    error = l_value - row[0]
+    for element in range(1, len(row)):
+        gradient = error * row[element]
+        weights[element] = weights[element] - gradient * learning_rate 
+    return weights
 
 def train_for_each_house(data):
     for house in houses:
+        weights = list(range(20))
         house_data = prep_data_for_each_house(data, house)
         for i in range(epochs):
             for row in house_data:
+                predict = 0
                 for element in range(1, len(row)):
-                    pass
-        
+                    predict += row[element] * weights[element]
+                logistic_value = sigmoid_function(predict)
+                weights = gradient_descend( row, logistic_value, weights)
+        # print(weights)
+                if i == (epochs-1):
+                    print ( row[0], logistic_value)
+
+
 
 
 def train_model(dataset_name):
