@@ -16,6 +16,7 @@ def prep_data_for_each_house(data, house):
             row[0] = 0
     return new_data
 
+
 # logistic_function
 def sigmoid_function(prediction):
     return (1 / (1 + math.exp(-prediction)))
@@ -27,6 +28,7 @@ def gradient_descend(row, l_value, weights):
         gradient = error * row[element]
         weights[element] = weights[element] - gradient * learning_rate 
     return weights
+
 
 def train_for_each_house(data):
     for house in houses:
@@ -42,8 +44,6 @@ def train_for_each_house(data):
         # print(weights)
                 if i == (epochs-1):
                     print (row[0], logistic_value)
-
-
 
 
 def train_model(dataset_name):
