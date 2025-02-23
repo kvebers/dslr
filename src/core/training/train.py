@@ -31,8 +31,9 @@ def gradient_descend(row, l_value, weights):
 
 
 def train_for_each_house(data):
+    weights = [0.0 for i in range(len(data[0]))]
+    trained_models = []
     for house in houses:
-        weights = [0.0 for i in range(len(data[0]))]
         house_data = prep_data_for_each_house(data, house)
         for i in range(epochs):
             for row in house_data:
@@ -41,12 +42,14 @@ def train_for_each_house(data):
                     predict += row[element] * weights[element]
                 logistic_value = sigmoid_function(predict)
                 weights = gradient_descend( row, logistic_value, weights)
-        # print(weights)
                 if i == (epochs-1):
                     print (row[0], logistic_value)
+        trained_models[house] = weights
+
 
 
 def train_model(dataset_name):
     array_of_names = ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
     data, header = clean_data_and_feed_it_francesco(dataset_name, array_of_names)
-    train_for_each_house(data)
+    model=train_for_each_house(data)
+    return model
