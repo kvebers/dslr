@@ -18,9 +18,11 @@ def read_dataset(dataset):
             data.append(row)
     return data, header
 
+
 def get_column(dataset, column, header):
     col = header.index(column)
     return [row[col] for row in dataset]
+
 
 def get_count(row):
     count = 0
@@ -122,6 +124,7 @@ def get_min_data(dataset, header):
             min_row.append('Not a float')
     return min_row
 
+
 def get_max_data(dataset, header):
     max_row = ["Max"]
     for row in header:
@@ -130,7 +133,6 @@ def get_max_data(dataset, header):
         else:
             max_row.append('Not a float')
     return max_row
-
 
 
 def my_sort(dataset):
@@ -166,6 +168,7 @@ def get_quartiles(dataset, header):
             v_75.append('Not a float')
     return v_25, v_50, v_75
 
+
 def remove_columns(dataset, headers_to_remove):
     dataset_values, header = read_dataset(dataset)
     index_to_remove = [header.index(header_to_remove) for header_to_remove in headers_to_remove]
@@ -199,6 +202,7 @@ def clean_data_and_feed_it_francesco(dataset, headers_to_remove):
     new_dataset = remove_empty_rows(cleaned_dataset)
     normalize_data(new_dataset, header)
     return new_dataset, header
+
 
 def  execute_describe(dataset):
     dataset_values, header = read_dataset(dataset)

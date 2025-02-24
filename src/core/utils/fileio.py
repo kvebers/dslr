@@ -12,3 +12,14 @@ def extract_input_from_file (filename :str = "dataset_train.csv") -> list :
         return value
     except:
         return None
+
+
+def save_model(models: list) -> bool:
+    os.makedirs("./models", exist_ok=True)
+    try:
+        with open("./models/logistic_regression_model.json", "w") as f:
+            json.dump(models, f)
+    except Exception as e:
+        print(f"Error: {e}")
+        return False
+    return True
