@@ -31,10 +31,10 @@ def gradient_descend(row, l_value, weights):
 
 
 def train_for_each_house(data):
-    weights = [0.0 for i in range(len(data[0]))]
     model = []
     for house in houses:
         house_data = prep_data_for_each_house(data, house)
+        weights = [0.0 for i in range(len(data[0]))]
         for i in range(epochs):
             for row in house_data:
                 predict = 0
@@ -49,4 +49,4 @@ def train_model(dataset_name):
     array_of_names = ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
     data, header = clean_data_and_feed_it_francesco(dataset_name, array_of_names)
     model = train_for_each_house(data)
-    return model
+    return model.insert(0,header)
