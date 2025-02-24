@@ -43,10 +43,10 @@ def train_for_each_house(data):
                 logistic_value = sigmoid_function(predict)
                 weights = gradient_descend( row, logistic_value, weights)
         model.append(weights)
-    return model    
+    return model   
 
 def train_model(dataset_name):
     array_of_names = ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
     data, header = clean_data_and_feed_it_francesco(dataset_name, array_of_names)
     model = train_for_each_house(data)
-    return model.insert(0,header)
+    return [header] + model[:]

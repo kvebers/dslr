@@ -14,7 +14,7 @@ def predict(X, weights):
 if __name__ == "__main__":
     dataset = 'data/dataset_train.csv'
     if (len(sys.argv) != 1):
-        print("The task is to identify the distibution of the data between all houses in the dataset and find the subject where it is evenly distributed.")
+        print("")
         print("Usage: ./logreg_train.py")
         sys.exit(1)
     with open("logistic_regression_model.json", "r") as f:
