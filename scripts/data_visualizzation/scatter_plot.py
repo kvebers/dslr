@@ -1,8 +1,19 @@
 #!/usr/bin/env python3
 
-#!/usr/bin/env python3
-from core.plots.plots import scatter_plot
+
+import os
 import sys
+
+def set_path () : 
+    ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+    sys.path.append(ROOT_DIR)
+    print(ROOT_DIR)
+
+if "/script/" in os.path:
+    set_path()
+
+from src.core.plots.plots import scatter_plot
+
 
 if __name__ == "__main__":
     dataset = 'data/dataset_train.csv'
