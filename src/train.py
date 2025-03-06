@@ -16,5 +16,7 @@ if __name__ == "__main__":
     models = train_model(dataset)
     if save_model(models) == False:
         print("Error in saving models.")
+    else:
+        print ("Model saved in ./models/")
+    return True
 
-    
