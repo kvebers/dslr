@@ -1,4 +1,4 @@
-from ..description.operation import clean_data_and_feed_it_francesco
+from core.utils.dataset_operation import clean_data_and_normalize
 import copy
 import math
 
@@ -45,8 +45,9 @@ def train_for_each_house(data):
         model.append(weights)
     return model   
 
+
 def train_model(dataset_name):
     array_of_names = ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
-    data, header = clean_data_and_feed_it_francesco(dataset_name, array_of_names)
+    data, header = clean_data_and_normalize(dataset_name, array_of_names)
     model = train_for_each_house(data)
     return [header] + model[:]

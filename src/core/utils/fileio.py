@@ -1,6 +1,27 @@
 import os
 import json
 
+
+def read_dataset(dataset) -> tuple[list, list]:
+    """
+        This function takes a path to a file. Open it and returns:
+            - Header: Name of the Columns in the Datasets.
+            - Data: All the entry(row) in the Dataset.
+    """
+    data = []
+    header = []
+    with open(dataset) as f:
+        for index, line in enumerate(f):
+            line = line.strip()
+            line = line.replace(',,', ', ,')
+            row = line.split(',')
+            if index == 0:
+                header = row
+                continue
+            data.append(row)
+    return data, header
+
+
 def extract_input_from_file (filename :str = "dataset_train.csv") -> list :
     current_directory = str(os.getcwd())
     PATH = current_directory + "/data/" + filename

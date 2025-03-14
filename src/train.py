@@ -2,7 +2,6 @@
 from core.training.train import train_model
 from core.utils.fileio import save_model
 import sys
-import json
 
 
 if __name__ == "__main__":
@@ -18,5 +17,3 @@ if __name__ == "__main__":
         print("Error in saving models.")
     else:
         print ("Model saved in ./models/")
-    return True
-
