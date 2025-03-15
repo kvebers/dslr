@@ -75,14 +75,8 @@ def remove_empty_rows(dataset):
         f.write(str(dataset))
     new_dataset = []
     for row in dataset:
-        if not all(cell != '' and cell != ' ' for cell in row):
-            for i in range(len(row)):
-                if row[i] == ' ':
-                    row[i] = ''
+        if all(cell != '' and cell != ' ' for cell in row):
                 new_dataset.append(row)
-                i=i+1
-    with open('test2.out', 'w') as f:
-        f.write(str(new_dataset))
     return new_dataset
 
 

@@ -19,7 +19,7 @@ def prep_data_for_each_house(data, house):
 
 # logistic_function
 def sigmoid_function(prediction):
-    return (1 / (1 + math.exp(-prediction)))
+    return (1 / (1 + math.exp(-prediction)))    
 
 
 def gradient_descend(row, l_value, weights):

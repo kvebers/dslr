@@ -6,6 +6,22 @@ from core.training.train import sigmoid_function
 from core.utils.dataset_operation import clean_data_and_normalize
 import pprint 
 
+
+def compare_most_probable(preds :list) -> list:
+    tmp_value = 0
+    index_tmp = 0
+    for index,value in enumerate(preds, 0):
+        if float(value) > float(tmp_value):
+            tmp_value = value
+            index_tmp = index
+    for index,value in enumerate(preds, 0):
+        if index == index_tmp:
+            preds[index] = 1
+        else:
+            preds[index] = 0
+    return preds
+
+
 def predict(X, weights):
     
     predict = []
@@ -17,24 +33,21 @@ def predict(X, weights):
         predict.append(product)
     for value in predict:
         prob = sigmoid_function(value)
-        result.append(prob) 
-    # return result
-    result = []
-    for value in predict: 
-        if sigmoid_function(value) >= 0.5:
-            result.append('1')
+        if prob >= 0.5:
+            result.append(prob)
         else:
             result.append('0')
+    result = compare_most_probable(result)
     return result
             
 
 
 if __name__ == "__main__":
     dataset = './data/dataset_test.csv'
-    array_of_names = ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
+    array_of_names = ["Hogwarts House","Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
     clean_data, header = clean_data_and_normalize(dataset, array_of_names)
-    print("CLEAN_DATA")
-    print(clean_data)
+    print(len(clean_data))
+
     if (len(sys.argv) != 1):
         print("")
         print("Usage: ./logreg_train.py")
@@ -43,9 +56,6 @@ if __name__ == "__main__":
         trained_models = json.load(f)
         tags = trained_models[0]
         weights = trained_models[1:]
-        for value in weights:
-            pprint.pp(value)
-    student_scores = [1, 8.5, 7.0, 9.0, 5.5, 6.0, 7.5, 8.0, 7.8, 8.2, 6.9, 5.0]
     for row in clean_data:
         result = predict(row, weights)
         print(result)
