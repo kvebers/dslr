@@ -82,6 +82,8 @@ def remove_empty_rows(dataset):
 
 def clean_data_and_normalize(dataset, headers_to_remove):
     cleaned_dataset, header = remove_columns(dataset, headers_to_remove)
+    print("HEADER:")
+    print(header)
     new_dataset = remove_empty_rows(cleaned_dataset)
     normalize_data(new_dataset, header)
     return new_dataset, header

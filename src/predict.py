@@ -4,6 +4,7 @@ import sys
 import json
 from core.training.train import sigmoid_function
 from core.utils.dataset_operation import clean_data_and_normalize
+from core.const import ARRAY_OF_NAMES
 import pprint 
 
 
@@ -27,10 +28,10 @@ def predict(X, weights):
     predict = []
     result = []
     for weight in weights:
-        product = 0
+        linear_combination = 0
         for i in range(1, len(X)):
-            product += X[i] * weight[i]
-        predict.append(product)
+            linear_combination += X[i] * weight[i]
+        predict.append(linear_combination)
     for value in predict:
         prob = sigmoid_function(value)
         if prob >= 0.5:
@@ -44,8 +45,7 @@ def predict(X, weights):
 
 if __name__ == "__main__":
     dataset = './data/dataset_test.csv'
-    array_of_names = ["Hogwarts House","Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
-    clean_data, header = clean_data_and_normalize(dataset, array_of_names)
+    clean_data, header = clean_data_and_normalize(dataset, ARRAY_OF_NAMES)
     print(len(clean_data))
 
     if (len(sys.argv) != 1):

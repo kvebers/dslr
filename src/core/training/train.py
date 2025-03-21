@@ -47,7 +47,7 @@ def train_for_each_house(data):
 
 
 def train_model(dataset_name):
-    array_of_names = ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
-    data, header = clean_data_and_normalize(dataset_name, array_of_names)
+    columns_to_remove = ["Index", "First Name", "Last Name", "Birthday", "Best Hand", "Arithmancy", "Care of Magical Creatures"]
+    data, header = clean_data_and_normalize(dataset_name, columns_to_remove)
     model = train_for_each_house(data)
     return [header] + model[:]
