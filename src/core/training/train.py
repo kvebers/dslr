@@ -35,7 +35,7 @@ def train_for_each_house(data):
     model = []
     for house in houses:
         house_data = prep_data_for_each_house(data, house)
-        weights = [0.0 for i in range(len(data[0]))]
+        weights = [i / 1000 * (-1)**i  for i in range(len(data[0]))]
         for i in range(epochs):
             for row in house_data:
                 predict = 0

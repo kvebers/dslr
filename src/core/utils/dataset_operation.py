@@ -74,7 +74,7 @@ def remove_empty_rows(dataset):
     new_dataset = []
     for row in dataset:
         if all(cell != '' and cell != ' ' for cell in row):
-                new_dataset.append(row)
+            new_dataset.append(row)
     return new_dataset
 
 
