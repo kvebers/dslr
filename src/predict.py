@@ -5,7 +5,8 @@ import json
 from core.training.train import sigmoid_function
 from core.utils.dataset_operation import clean_data_and_normalize
 from core.const import ARRAY_OF_NAMES
-import pprint 
+import pprint
+from core.training.train import houses
 
 
 def compare_most_probable(preds :list) -> list:
@@ -23,31 +24,29 @@ def compare_most_probable(preds :list) -> list:
     return preds
 
 
-def predict(X, weights):
-    
+def predict(X, houseModels):
     predict = []
     result = []
-    for weight in weights:
+    for weights in houseModels:
         linear_combination = 0
         for i in range(1, len(X)):
-            linear_combination += X[i] * weight[i]
+            linear_combination += X[i] * weights[i]
         predict.append(linear_combination)
     for value in predict:
         prob = sigmoid_function(value)
-        if prob >= 0.5:
-            result.append(prob)
-        else:
-            result.append('0')
+        result.append(prob)
     result = compare_most_probable(result)
-    return result
+    actual_result = []
+    for index, value in enumerate(result, 0):
+        if value == 1:
+            actual_result.append(houses[index])
+    return actual_result
             
 
 
 if __name__ == "__main__":
-    dataset = './data/dataset_test.csv'
+    dataset = './data/dataset_train.csv'
     clean_data, header = clean_data_and_normalize(dataset, ARRAY_OF_NAMES)
-    print(len(clean_data))
-
     if (len(sys.argv) != 1):
         print("")
         print("Usage: ./logreg_train.py")
@@ -55,9 +54,9 @@ if __name__ == "__main__":
     with open("./models/logistic_regression_model.json", "r") as f:
         trained_models = json.load(f)
         tags = trained_models[0]
-        weights = trained_models[1:]
+        houseModels = trained_models[1:]
     for row in clean_data:
-        result = predict(row, weights)
+        result = predict(row, houseModels)
         print(result)
 
 

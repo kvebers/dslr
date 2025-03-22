@@ -71,8 +71,6 @@ def remove_columns(dataset, headers_to_remove):
 
 
 def remove_empty_rows(dataset):
-    with open('test.out', 'w') as f:
-        f.write(str(dataset))
     new_dataset = []
     for row in dataset:
         if all(cell != '' and cell != ' ' for cell in row):
@@ -82,8 +80,6 @@ def remove_empty_rows(dataset):
 
 def clean_data_and_normalize(dataset, headers_to_remove):
     cleaned_dataset, header = remove_columns(dataset, headers_to_remove)
-    print("HEADER:")
-    print(header)
     new_dataset = remove_empty_rows(cleaned_dataset)
     normalize_data(new_dataset, header)
     return new_dataset, header
