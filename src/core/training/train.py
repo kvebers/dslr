@@ -3,8 +3,8 @@ import copy
 import math
 
 houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
-learning_rate = 0.1
-epochs = 100
+learning_rate = 0.01
+epochs = 500
 
 def prep_data_for_each_house(data, house):
     # data = [row for row in data if row[0] == house row[0] = 1 else row[0] = 0]
@@ -54,9 +54,13 @@ def train_model(dataset_name):
     "Last Name",
     "Birthday",
     "Best Hand",
-    "Arithmancy",
     "Care of Magical Creatures",
+    "History of Magic",
+    "Potions",
     ]
     data, header = clean_data_and_normalize(dataset_name, columns_to_remove, 1)
+    with open("validate.txt", "w") as file:
+        for item in data:
+            file.write(f"['{item[0]}']\n")
     model = train_for_each_house(data)
     return [header] + model[:]

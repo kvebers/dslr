@@ -55,8 +55,9 @@ if __name__ == "__main__":
         trained_models = json.load(f)
         tags = trained_models[0]
         houseModels = trained_models[1:]
-    for row in clean_data:
-        result = predict(row, houseModels)
-        print(result)
+    with open("test.txt", "w") as file:
+        for row in clean_data:
+            result = predict(row, houseModels)
+            file.write(f"{result}\n")
 
 

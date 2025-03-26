@@ -5,8 +5,9 @@ ARRAY_OF_NAMES = [
     "Last Name",
     "Birthday",
     "Best Hand",
-    "Arithmancy",
     "Care of Magical Creatures",
+    "History of Magic",
+    "Potions",
     ]
 MODEL_NAME = "logistic_regression_model"
 HOUSES = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
