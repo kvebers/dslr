@@ -46,7 +46,7 @@ def predict(X, houseModels):
 
 if __name__ == "__main__":
     dataset = './data/dataset_train.csv'
-    clean_data, header = clean_data_and_normalize(dataset, ARRAY_OF_NAMES)
+    clean_data, header = clean_data_and_normalize(dataset, ARRAY_OF_NAMES, 0)
     if (len(sys.argv) != 1):
         print("")
         print("Usage: ./logreg_train.py")

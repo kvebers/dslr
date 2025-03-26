@@ -57,6 +57,6 @@ def train_model(dataset_name):
     "Arithmancy",
     "Care of Magical Creatures",
     ]
-    data, header = clean_data_and_normalize(dataset_name, columns_to_remove)
+    data, header = clean_data_and_normalize(dataset_name, columns_to_remove, 1)
     model = train_for_each_house(data)
     return [header] + model[:]

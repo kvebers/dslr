@@ -78,10 +78,10 @@ def remove_empty_rows(dataset):
     return new_dataset
 
 
-def clean_data_and_normalize(dataset, headers_to_remove):
+def clean_data_and_normalize(dataset, headers_to_remove, flag):
     cleaned_dataset, header = remove_columns(dataset, headers_to_remove)
     new_dataset = remove_empty_rows(cleaned_dataset)
-    normalize_data(new_dataset, header)
+    normalize_data(new_dataset, header, flag)
     return new_dataset, header
 
 
