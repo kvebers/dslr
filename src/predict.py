@@ -30,11 +30,12 @@ def predict(X, houseModels):
     for weights in houseModels:
         linear_combination = 0
         for i in range(1, len(X)):
-            linear_combination += X[i] * weights[i]
+            linear_combination += X[i - 1] * weights[i]
         predict.append(linear_combination)
     for value in predict:
         prob = sigmoid_function(value)
         result.append(prob)
+    print(result)
     result = compare_most_probable(result)
     actual_result = []
     for index, value in enumerate(result, 0):
@@ -46,7 +47,7 @@ def predict(X, houseModels):
 
 if __name__ == "__main__":
     dataset = './data/dataset_train.csv'
-    clean_data, header = clean_data_and_normalize(dataset, ARRAY_OF_NAMES)
+    clean_data, header = clean_data_and_normalize(dataset, ARRAY_OF_NAMES, 0)
     if (len(sys.argv) != 1):
         print("")
         print("Usage: ./logreg_train.py")
@@ -55,8 +56,9 @@ if __name__ == "__main__":
         trained_models = json.load(f)
         tags = trained_models[0]
         houseModels = trained_models[1:]
-    for row in clean_data:
-        result = predict(row, houseModels)
-        print(result)
+    with open("test.txt", "w") as file:
+        for row in clean_data:
+            result = predict(row, houseModels)
+            file.write(f"{result}\n")
 
 

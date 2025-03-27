@@ -1,3 +1,7 @@
+import os
+import json
+from core.utils.fileio import read_dataset
+
 def get_count(row):
     count = 0
     for element in row:
@@ -72,7 +76,6 @@ def sort_data_and_get_percentile(dataset, percentile):
 def get_quartiles(dataset, header):
     from core.utils.dataset_operation import get_column
     from core.utils.data_validation import check_if_can_calculate_mean
-
     v_25 = ["25%"]
     v_50 = ["50%"]
     v_75 = ["75%"]
@@ -87,19 +90,71 @@ def get_quartiles(dataset, header):
             v_75.append('Not a float')
     return v_25, v_50, v_75
 
+# def normalize_data(dataset, header, flag):
+#     from core.utils.data_validation import check_if_can_calculate_mean
+#     from core.utils.dataset_operation import get_column
+#     new_dataset = dataset.copy()
+#     data = []
+#     if not flag:
+#         with open("./models/normalization.json", "r") as f:
+#             data = json.load(f)
+#     for i in range(len(header)):
+#         if check_if_can_calculate_mean(get_column(dataset, header[i], header)):
+#             column = get_column(dataset, header[i], header)
+#             min_value = 0
+#             max_value = 0
+#             if flag:
+#                 min_value = get_min(column)
+#                 max_value = get_max(column)
+#                 data.append((header[i], min_value, max_value))
+#             else:
+#                 for element in data:
+#                     print(element)
+#                     if element[0] == header[i]:
+#                         min_value = element[1]
+#                         max_value = element[2]
+#             for j in range(len(column)):
+#                 if column[j] == '':
+#                     column[j] = 0
+#                 new_dataset[j][i] = (float(column[j]) - min_value) / (max_value - min_value)
+#     if flag:
+#         with open("./models/normalization.json", "w") as f:
+#             json.dump(data, f)
+#     return new_dataset
 
-def normalize_data(dataset, header):
+
+def normalize_data(dataset, header, flag):
     from core.utils.data_validation import check_if_can_calculate_mean
     from core.utils.dataset_operation import get_column
-
     new_dataset = dataset.copy()
+    data = []
+    v_25, v_50, v_75 = get_quartiles(new_dataset, header)
+
+    if not flag:
+        with open("./models/normalization.json", "r") as f:
+            data = json.load(f)
     for i in range(len(header)):
         if check_if_can_calculate_mean(get_column(dataset, header[i], header)):
             column = get_column(dataset, header[i], header)
-            min_value = get_min(column)
-            max_value = get_max(column)
+            if flag:
+                new_v25 = v_25[i + 1]
+                new_v50 = v_50[i + 1]
+                new_v75 = v_75[i + 1]
+                data.append((header[i], v_25[i + 1], v_50[i + 1], v_75[i + 1]))
+            else:
+                for element in data:
+                    if element[0] == header[i]:
+                        new_v25 = element[1]
+                        new_v50 = element[2]
+                        new_v75 = element[3]
+
             for j in range(len(column)):
                 if column[j] == '':
                     column[j] = 0
-                new_dataset[j][i] = (float(column[j]) - min_value) / (max_value - min_value)
+                new_dataset[j][i] = (float(column[j]) - new_v50) / (new_v75 - new_v25)
+
+    if flag:
+        with open("./models/normalization.json", "w") as f:
+            json.dump(data, f)
+
     return new_dataset

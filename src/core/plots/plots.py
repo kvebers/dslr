@@ -30,7 +30,7 @@ def hands_data(data):
 def histogram_plot(dataset):
     data = pd.read_csv(dataset)
     courses = data.columns[6:]
-    new_courses = normalize_data(data[courses])
+    new_courses = normalize_data(data[courses], 0)
     fig, axes = plt.subplots(int((len(courses) + 2) / 3), 3, figsize=(8, 4))
     axes = axes.flatten()
     for i, course in enumerate(courses):
@@ -67,7 +67,7 @@ def scatter_plot(dataset):
     data["Days"] = extract_days(data["Birthday"])
     data["House Normalized"] = normalize_houses(data["Hogwarts House"])
     courses = data.columns[6:]
-    new_courses = normalize_data(data[courses])
+    new_courses = normalize_data(data[courses], 0)
     fig, axes = plt.subplots(len(courses), len(courses), figsize=(16, 10))
     axes = axes.flatten()
     for i, course in enumerate(courses):
@@ -102,7 +102,7 @@ def scatter_plot(dataset):
 def pair_scatter_histogram_plot(dataset):
     data = pd.read_csv(dataset)
     courses = data.columns[6:]
-    new_courses = normalize_data(data[courses])
+    new_courses = normalize_data(data[courses], 0)
     fig, axes = plt.subplots(len(courses), len(courses), figsize=(16, 10))
     axes = axes.flatten()
     for i, course in enumerate(courses):
