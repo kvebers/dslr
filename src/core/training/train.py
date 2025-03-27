@@ -52,7 +52,7 @@ def train_for_each_house(data):
                     predict += row[element] * weights[element]                
                 logistic_value = sigmoid_function(predict)
                 pred_error = logistic_value - row[0]
-                if (pred_error < 0.5):
+                if (pred_error < 0.3):
                     correct += 1
                 for element in range(1, len(row)):
                     error[element] += pred_error * row[element]

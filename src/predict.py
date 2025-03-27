@@ -30,11 +30,12 @@ def predict(X, houseModels):
     for weights in houseModels:
         linear_combination = 0
         for i in range(1, len(X)):
-            linear_combination += X[i] * weights[i]
+            linear_combination += X[i - 1] * weights[i]
         predict.append(linear_combination)
     for value in predict:
         prob = sigmoid_function(value)
         result.append(prob)
+    print(result)
     result = compare_most_probable(result)
     actual_result = []
     for index, value in enumerate(result, 0):
