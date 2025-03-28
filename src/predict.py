@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-from core.training.train import train_model
 import sys
 import json
 from core.training.train import sigmoid_function
 from core.utils.dataset_operation import clean_data_and_normalize
 from core.const import ARRAY_OF_NAMES
-import pprint
 from core.training.train import houses
 
 
@@ -44,7 +42,6 @@ def predict(X, houseModels):
     return actual_result
             
 
-
 if __name__ == "__main__":
     dataset = './data/dataset_train.csv'
     clean_data, header = clean_data_and_normalize(dataset, ARRAY_OF_NAMES, 0)
@@ -60,5 +57,3 @@ if __name__ == "__main__":
         for row in clean_data:
             result = predict(row, houseModels)
             file.write(f"{result}\n")
-
-
