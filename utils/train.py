@@ -11,8 +11,8 @@ from dataset_operation import clean_data_and_normalize
 from const import TRAINING_ARRAY_OF_NAMES
 
 houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
-learning_rate = 0.005
-epochs = 200
+learning_rate = 0.001
+epochs = 500
 
 def prep_data_for_each_house(data, house):
     # data = [row for row in data if row[0] == house row[0] = 1 else row[0] = 0]
