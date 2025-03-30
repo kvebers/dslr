@@ -95,6 +95,18 @@ def get_quartiles(dataset, header):
             v_75.append('Not a float')
     return v_25, v_50, v_75
 
+def get_interquartile_range(dataset,header):
+    v_25, v_50, v_75 = get_quartiles(dataset, header)
+    result = []
+    for i_cell in range(len(v_75)):
+        try:
+            result.append(float(v_75[i_cell]) - float(v_25[i_cell]))
+        except:
+            result.append("Not a float")
+    result[0] = "IQR"
+    return result
+
+
 # def normalize_data(dataset, header, flag):
 #     from core.utils.data_validation import check_if_can_calculate_mean
 #     from core.utils.dataset_operation import get_column
@@ -163,3 +175,11 @@ def normalize_data(dataset, header, flag):
             json.dump(data, f)
 
     return new_dataset
+
+
+def get_count_empty(column):
+    count = 0
+    for element in column:
+        if element == ' ' or element == None:
+            count = count + 1
+    return count

@@ -8,8 +8,12 @@ from utils.dataset_operation import (
         get_min_data,
         get_max_data,
         get_mean_data,
-        get_count_data
+        get_count_data,
+        count_empty_rows, 
 )
+
+from utils.operation import get_interquartile_range
+
 
 
 
@@ -27,6 +31,9 @@ def  execute_describe(dataset):
     print(v_25)
     print(v_50)
     print(v_75)
+    print("************BONUS**********")
+    print(count_empty_rows(dataset_values, header))
+    print(get_interquartile_range(dataset_values,header))
 
 
 if __name__ == "__main__":

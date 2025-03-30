@@ -9,7 +9,9 @@ from operation import (get_std,
                                   get_count, 
                                   get_max, 
                                   get_min,
-                                  normalize_data
+                                  get_count,
+                                  normalize_data,
+                                  get_count_empty
                                   )
                                   
 from data_validation import check_if_can_calculate_mean
@@ -21,6 +23,12 @@ def get_column(dataset, column, header):
     col = header.index(column)
     return [row[col] for row in dataset]
 
+
+def count_empty_rows(dataset, header):
+    min_row = ["Empty Cells"]
+    for row in header:
+        min_row.append(get_count_empty(get_column(dataset, row, header)))
+    return min_row
 
 def get_min_data(dataset, header):
     min_row = ["Min"]
