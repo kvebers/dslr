@@ -8,6 +8,7 @@ import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 from dataset_operation import clean_data_and_normalize
+from const import TRAINING_ARRAY_OF_NAMES
 
 houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
 learning_rate = 0.01
@@ -69,14 +70,7 @@ def train_for_each_house(data):
 
 
 def train_model(dataset_name):
-    columns_to_remove = [
-    "Index",
-    "First Name",
-    "Last Name",
-    "Birthday",
-    "Best Hand",
-    ]
-    data, header = clean_data_and_normalize(dataset_name, columns_to_remove, 1)
+    data, header = clean_data_and_normalize(dataset_name, TRAINING_ARRAY_OF_NAMES, 1)
     with open("validate/validate.txt", "w") as file:
         for item in data:
             file.write(f"{item[0]}\n")

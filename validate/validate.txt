@@ -15,6 +15,7 @@ Gryffindor
 Gryffindor
 Ravenclaw
 Hufflepuff
+Gryffindor
 Ravenclaw
 Hufflepuff
 Ravenclaw
@@ -57,6 +58,7 @@ Hufflepuff
 Ravenclaw
 Gryffindor
 Hufflepuff
+Ravenclaw
 Slytherin
 Hufflepuff
 Ravenclaw
@@ -105,6 +107,7 @@ Slytherin
 Gryffindor
 Slytherin
 Hufflepuff
+Ravenclaw
 Ravenclaw
 Hufflepuff
 Gryffindor
@@ -124,6 +127,7 @@ Slytherin
 Hufflepuff
 Gryffindor
 Hufflepuff
+Ravenclaw
 Hufflepuff
 Hufflepuff
 Hufflepuff
@@ -185,6 +189,7 @@ Ravenclaw
 Hufflepuff
 Slytherin
 Ravenclaw
+Hufflepuff
 Hufflepuff
 Hufflepuff
 Gryffindor
@@ -194,6 +199,7 @@ Hufflepuff
 Hufflepuff
 Gryffindor
 Hufflepuff
+Gryffindor
 Ravenclaw
 Ravenclaw
 Slytherin
@@ -220,6 +226,7 @@ Ravenclaw
 Ravenclaw
 Hufflepuff
 Hufflepuff
+Gryffindor
 Hufflepuff
 Ravenclaw
 Hufflepuff
@@ -241,6 +248,7 @@ Hufflepuff
 Slytherin
 Hufflepuff
 Hufflepuff
+Gryffindor
 Slytherin
 Ravenclaw
 Hufflepuff
@@ -263,6 +271,7 @@ Slytherin
 Ravenclaw
 Slytherin
 Hufflepuff
+Hufflepuff
 Ravenclaw
 Ravenclaw
 Slytherin
@@ -271,6 +280,7 @@ Gryffindor
 Ravenclaw
 Slytherin
 Ravenclaw
+Slytherin
 Slytherin
 Ravenclaw
 Hufflepuff
@@ -290,6 +300,7 @@ Ravenclaw
 Slytherin
 Ravenclaw
 Hufflepuff
+Hufflepuff
 Ravenclaw
 Hufflepuff
 Hufflepuff
@@ -467,6 +478,7 @@ Ravenclaw
 Ravenclaw
 Hufflepuff
 Gryffindor
+Ravenclaw
 Ravenclaw
 Ravenclaw
 Slytherin
@@ -555,6 +567,7 @@ Ravenclaw
 Gryffindor
 Hufflepuff
 Gryffindor
+Gryffindor
 Ravenclaw
 Ravenclaw
 Ravenclaw
@@ -638,6 +651,7 @@ Slytherin
 Hufflepuff
 Slytherin
 Hufflepuff
+Ravenclaw
 Ravenclaw
 Ravenclaw
 Gryffindor
@@ -655,6 +669,7 @@ Ravenclaw
 Hufflepuff
 Hufflepuff
 Gryffindor
+Hufflepuff
 Ravenclaw
 Ravenclaw
 Gryffindor
@@ -734,6 +749,8 @@ Gryffindor
 Slytherin
 Hufflepuff
 Hufflepuff
+Ravenclaw
+Gryffindor
 Gryffindor
 Gryffindor
 Hufflepuff
@@ -816,7 +833,9 @@ Ravenclaw
 Slytherin
 Gryffindor
 Ravenclaw
+Slytherin
 Hufflepuff
+Ravenclaw
 Slytherin
 Gryffindor
 Ravenclaw
@@ -993,6 +1012,7 @@ Slytherin
 Slytherin
 Ravenclaw
 Slytherin
+Slytherin
 Hufflepuff
 Gryffindor
 Hufflepuff
@@ -1052,6 +1072,7 @@ Hufflepuff
 Ravenclaw
 Slytherin
 Ravenclaw
+Hufflepuff
 Slytherin
 Ravenclaw
 Slytherin
@@ -1064,6 +1085,7 @@ Ravenclaw
 Hufflepuff
 Ravenclaw
 Hufflepuff
+Hufflepuff
 Gryffindor
 Ravenclaw
 Hufflepuff
@@ -1081,6 +1103,8 @@ Hufflepuff
 Slytherin
 Hufflepuff
 Gryffindor
+Ravenclaw
+Hufflepuff
 Ravenclaw
 Ravenclaw
 Ravenclaw
@@ -1153,6 +1177,7 @@ Slytherin
 Hufflepuff
 Slytherin
 Hufflepuff
+Gryffindor
 Hufflepuff
 Slytherin
 Ravenclaw
@@ -1200,6 +1225,7 @@ Hufflepuff
 Gryffindor
 Ravenclaw
 Slytherin
+Ravenclaw
 Ravenclaw
 Hufflepuff
 Ravenclaw
@@ -1208,6 +1234,7 @@ Hufflepuff
 Ravenclaw
 Hufflepuff
 Hufflepuff
+Slytherin
 Gryffindor
 Gryffindor
 Slytherin
@@ -1216,6 +1243,7 @@ Ravenclaw
 Ravenclaw
 Ravenclaw
 Hufflepuff
+Ravenclaw
 Ravenclaw
 Ravenclaw
 Ravenclaw
