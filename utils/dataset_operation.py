@@ -1,12 +1,20 @@
-from core.utils.fileio import read_dataset
-from core.utils.operation import (get_std, 
+import sys
+import os
+
+
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+from fileio import read_dataset
+from operation import (get_std, 
                                   get_mean, 
                                   get_count, 
                                   get_max, 
                                   get_min,
                                   normalize_data
                                   )
-from core.utils.data_validation import check_if_can_calculate_mean
+                                  
+from data_validation import check_if_can_calculate_mean
+
+
 
 
 def get_column(dataset, column, header):

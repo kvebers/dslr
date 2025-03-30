@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import sys
 import json
-from core.training.train import sigmoid_function
-from core.utils.dataset_operation import clean_data_and_normalize
-from core.const import ARRAY_OF_NAMES
-from core.training.train import houses
+from utils.train import sigmoid_function
+from utils.dataset_operation import clean_data_and_normalize
+from utils.const import ARRAY_OF_NAMES
+from utils.train import houses
 
 
 def compare_most_probable(preds :list) -> list:
@@ -33,7 +33,6 @@ def predict(X, houseModels):
     for value in predict:
         prob = sigmoid_function(value)
         result.append(prob)
-    print(result)
     result = compare_most_probable(result)
     actual_result = []
     for index, value in enumerate(result, 0):
@@ -44,16 +43,22 @@ def predict(X, houseModels):
 
 if __name__ == "__main__":
     dataset = './data/dataset_train.csv'
+    if (len(sys.argv) == 1):
+        dataset = './data/dataset_test.csv'
     clean_data, header = clean_data_and_normalize(dataset, ARRAY_OF_NAMES, 0)
-    if (len(sys.argv) != 1):
-        print("")
-        print("Usage: ./logreg_train.py")
-        sys.exit(1)
-    with open("./models/logistic_regression_model.json", "r") as f:
-        trained_models = json.load(f)
-        tags = trained_models[0]
-        houseModels = trained_models[1:]
-    with open("test.txt", "w") as file:
-        for row in clean_data:
-            result = predict(row, houseModels)
-            file.write(f"{result}\n")
+    try:
+        with open("./models/logistic_regression_model.json", "r") as f:
+            trained_models = json.load(f)
+            tags = trained_models[0]
+            houseModels = trained_models[1:]
+        if (len(sys.argv) != 1):
+            with open("validate/predictions.txt", "w") as file:
+                for row in clean_data:
+                    result = predict(row, houseModels)
+                    file.write(f"{result[0]}\n")
+        else:
+            for row in clean_data:
+                result = predict(row, houseModels)
+                print(result[0])
+    except:
+        print("Something Went wrong")

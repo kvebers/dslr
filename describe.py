@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 import sys
-from core.utils.fileio import read_dataset
-from core.utils.operation import get_quartiles
-from core.utils.dataset_operation import ( 
+from utils.fileio import read_dataset
+from utils.operation import get_quartiles
+from utils.dataset_operation import ( 
         get_std_data,
         get_min_data,
         get_max_data,

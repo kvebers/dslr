@@ -1,13 +1,17 @@
-from core.utils.dataset_operation import clean_data_and_normalize
 import copy
 import math
 import random
 import matplotlib.pyplot as plt
+import sys
+import os
 
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
+from dataset_operation import clean_data_and_normalize
 
 houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
-learning_rate = 0.03
-epochs = 50
+learning_rate = 0.01
+epochs = 100
 
 def prep_data_for_each_house(data, house):
     # data = [row for row in data if row[0] == house row[0] = 1 else row[0] = 0]
@@ -23,16 +27,6 @@ def prep_data_for_each_house(data, house):
 # logistic_function
 def sigmoid_function(prediction):
     return (1 / (1 + math.exp(-prediction)))    
-
-
-# def gradient_descend(row, l_value, weights):
-#     error = l_value - row[0]
-# #    print(f"Prediction {row[0]} {1 if l_value > 0.5 else 0}")
-#     for element in range(1, len(row)):
-#         gradient = error * row[element]
-#         weights[element] = weights[element] - gradient * learning_rate
-#     return weights
-
 
 def train_for_each_house(data):
     model = []
@@ -83,8 +77,8 @@ def train_model(dataset_name):
     "Best Hand",
     ]
     data, header = clean_data_and_normalize(dataset_name, columns_to_remove, 1)
-    with open("validate.txt", "w") as file:
+    with open("validate/validate.txt", "w") as file:
         for item in data:
-            file.write(f"['{item[0]}']\n")
+            file.write(f"{item[0]}\n")
     model = train_for_each_house(data)
     return [header] + model[:]

@@ -1,6 +1,11 @@
 import os
 import json
-from core.utils.fileio import read_dataset
+import sys
+
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+from fileio import read_dataset
+
+
 
 def get_count(row):
     count = 0
@@ -74,8 +79,8 @@ def sort_data_and_get_percentile(dataset, percentile):
 
 
 def get_quartiles(dataset, header):
-    from core.utils.dataset_operation import get_column
-    from core.utils.data_validation import check_if_can_calculate_mean
+    from dataset_operation import get_column
+    from data_validation import check_if_can_calculate_mean
     v_25 = ["25%"]
     v_50 = ["50%"]
     v_75 = ["75%"]
@@ -124,8 +129,8 @@ def get_quartiles(dataset, header):
 
 
 def normalize_data(dataset, header, flag):
-    from core.utils.data_validation import check_if_can_calculate_mean
-    from core.utils.dataset_operation import get_column
+    from data_validation import check_if_can_calculate_mean
+    from dataset_operation import get_column
     new_dataset = dataset.copy()
     data = []
     v_25, v_50, v_75 = get_quartiles(new_dataset, header)
