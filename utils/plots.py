@@ -1,8 +1,14 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from ..description.operation import get_max
-from ..description.operation import get_min
-from core.const import HOUSES, COLORS
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+from operation import get_max
+from operation import get_min
+from const import HOUSES, COLORS
+
+
 
 def my_pandas_min_max_normalization(column):
     min_val = get_min(column)
@@ -11,7 +17,7 @@ def my_pandas_min_max_normalization(column):
 
 #numbers = [1, 2, 3, 4, 5]
 #squared_numbers = list(map(lambda x: x ** 2, numbers)) takes each element of numbers, squares it and returns a new list with the squared numbers.
-def normalize_data(data):
+def normalize_data_lazy(data):
     return data.apply(lambda column: my_pandas_min_max_normalization(column))
 
 # TO CHECK THIS ONES 
@@ -30,7 +36,7 @@ def hands_data(data):
 def histogram_plot(dataset):
     data = pd.read_csv(dataset)
     courses = data.columns[6:]
-    new_courses = normalize_data(data[courses], 0)
+    new_courses = normalize_data_lazy(data[courses])
     fig, axes = plt.subplots(int((len(courses) + 2) / 3), 3, figsize=(8, 4))
     axes = axes.flatten()
     for i, course in enumerate(courses):
@@ -42,7 +48,6 @@ def histogram_plot(dataset):
             ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True, color=COLORS[house])
             ax.set_title(f"{course}")
     axes[0].legend(loc='upper right', bbox_to_anchor=(0.0, 0.0))
-    plt.tight_layout()
     plt.show()
 
 
@@ -67,7 +72,7 @@ def scatter_plot(dataset):
     data["Days"] = extract_days(data["Birthday"])
     data["House Normalized"] = normalize_houses(data["Hogwarts House"])
     courses = data.columns[6:]
-    new_courses = normalize_data(data[courses], 0)
+    new_courses = normalize_data_lazy(data[courses])
     fig, axes = plt.subplots(len(courses), len(courses), figsize=(16, 10))
     axes = axes.flatten()
     for i, course in enumerate(courses):
@@ -102,7 +107,7 @@ def scatter_plot(dataset):
 def pair_scatter_histogram_plot(dataset):
     data = pd.read_csv(dataset)
     courses = data.columns[6:]
-    new_courses = normalize_data(data[courses], 0)
+    new_courses = normalize_data_lazy(data[courses])
     fig, axes = plt.subplots(len(courses), len(courses), figsize=(16, 10))
     axes = axes.flatten()
     for i, course in enumerate(courses):
@@ -114,7 +119,7 @@ def pair_scatter_histogram_plot(dataset):
                     data_regarding_house = data[data['Hogwarts House'] == house]
                     scores_in_particular_course = new_courses[course][data['Hogwarts House'] == house]
                     scores_in_particular_course = clean_data(scores_in_particular_course)
-                    ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True, color=colors[house])
+                    ax.hist(scores_in_particular_course, bins=25, alpha=0.5, label=house, density=True, color=COLORS[house])
                     ax.set_title(f"{course}")
                 else:
                     color = COLORS[house]

@@ -1,6 +1,11 @@
-from core.utils.fileio import extract_input_from_file
+import sys
+import os
 
 
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
+
+from fileio import extract_input_from_file
 
 def extract_data_content(rows: list) -> list[dict]:
     keys = rows[0].split(",") 

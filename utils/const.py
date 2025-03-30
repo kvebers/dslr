@@ -5,7 +5,18 @@ ARRAY_OF_NAMES = [
     "Last Name",
     "Birthday",
     "Best Hand",
-    ]
+    "Arithmancy",
+]
+
+TRAINING_ARRAY_OF_NAMES = [
+    "Index",
+    "First Name",
+    "Last Name",
+    "Birthday",
+    "Best Hand",
+    "Arithmancy",
+]
+
 MODEL_NAME = "logistic_regression_model"
 HOUSES = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
 COLORS = {
@@ -14,3 +25,4 @@ COLORS = {
     "Ravenclaw": "blue",
     "Hufflepuff": "yellow"
 }
+

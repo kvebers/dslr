@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from core.training.train import train_model
-from core.utils.fileio import save_model
+from utils.train import train_model
+from utils.fileio import save_model
 import sys
 
 

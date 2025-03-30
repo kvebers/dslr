@@ -1,6 +1,10 @@
 import os
 import json
-from core.const import MODEL_NAME
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+from const import MODEL_NAME
+
+
 
 def read_dataset(dataset) -> tuple[list, list]:
     """

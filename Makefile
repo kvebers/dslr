@@ -1,15 +1,7 @@
-IMAGE_NAME = dslr
-CURRENT_DIR = $(shell pwd)
 
-all: build run
+accuracy_test:
+	./logreg_train.py
+	./logreg_predict.py "just something"
+	./accuracy.py
 
-build:
-	docker build -t $(IMAGE_NAME) .
 
-run:
-	docker run -v $(CURRENT_DIR)/src:/usr/src -it $(IMAGE_NAME)
- 
-clean:
-	docker image rm $(IMAGE_NAME)
-
-.PHONY: build run
