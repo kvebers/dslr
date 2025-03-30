@@ -78,11 +78,30 @@ def remove_columns(dataset, headers_to_remove):
     return cleaned_dataset, header
 
 
+# def remove_empty_rows(dataset):
+#     new_dataset = []
+#     for row in dataset:
+#         if all(cell != '' and cell != ' ' for cell in row):
+#             new_dataset.append(row)
+#     return new_dataset
+
+
 def remove_empty_rows(dataset):
     new_dataset = []
+    sums = [0] * len(dataset[0])
+    i = 0
     for row in dataset:
-        if all(cell != '' and cell != ' ' for cell in row):
-            new_dataset.append(row)
+        for index, cell in enumerate(row):
+            try:
+                value = float(cell)
+                sums[index] += value
+            except:
+                pass
+        i += 1
+    empty_cell_replacments = [(sums[index] / i) for index in range(len(sums))]
+    for row in dataset:
+        new = [f"{empty_cell_replacments[index]}" if (cell == "" or cell == " ") else cell for index, cell in enumerate(row)]
+        new_dataset.append(new)
     return new_dataset
 
 
